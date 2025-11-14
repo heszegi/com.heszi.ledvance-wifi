@@ -11,7 +11,7 @@
     "en": "Ledvance Smart+ Wifi"
   },
   "description": {
-    "en": "The missing app for Homey to control LEDVANCE SMART+ Wifi lights"
+    "en": "Pair and control your LEDVANCE SMART+ Wifi lights"
   },
   "category": [
     "lights"
@@ -31,5 +31,12 @@
       "ledvance wifi tuya led light"
     ]
   },
-  "homepage": "https://heszi.com"
+  "homepage": "https://heszi.com",
+  "source": "https://github.com/heszegi/com.heszi.ledvance-wifi",
+  "bugs": {
+    "url": "https://github.com/heszegi/com.heszi.ledvance-wifi/issues"
+  },
+  "contributors": {
+    "developers": []
+  }
 }
