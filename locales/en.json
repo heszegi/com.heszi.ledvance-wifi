@@ -1,1 +1,22 @@
-{}
+{
+    "pair": {
+        "choose_pairing": {
+            "title": "Select adding method",
+            "legend": "Your method of adding devices:",
+            "AUTO": "Search automatically the IP and MAC address of your devices",
+            "MANUAL": "Setup devices manually by entering their IP and MAC address",
+            "next": "Next"
+        },
+        "setup_device": {
+            "title": "Setup selected device",
+            "legend": "Add your device required information:",
+            "next": "Add device",
+            "already_added_device": "Device with MAC address: [__mac__] already paired with Homey!"
+        }
+    },
+    "error":{
+        "device": {
+            "setting_device_value": "Error setting device value for key __key__: __error__"
+        }   
+    }
+}

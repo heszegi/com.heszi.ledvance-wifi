@@ -1,0 +1,7 @@
+{
+  "id": "key",
+  "type": "text",
+  "value":"",
+  "label": { "en": "Local key" },
+  "hint": { "en": "The local key of the device is available in the Ledvance mobile app under Device Settings." }
+}

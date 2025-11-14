@@ -1,0 +1,7 @@
+{
+    "id": "ip",
+    "type": "text",
+    "value":"",
+    "label": { "en": "IP" },
+    "hint": { "en": "The IP address of the device" }
+}

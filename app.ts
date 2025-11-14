@@ -2,7 +2,7 @@
 
 import Homey from 'homey';
 
-module.exports = class MyApp extends Homey.App {
+module.exports = class LedvanceWifiApp extends Homey.App {
 
   /**
    * onInit is called when the app is initialized.
@@ -10,5 +10,4 @@ module.exports = class MyApp extends Homey.App {
   async onInit() {
     this.log('MyApp has been initialized');
   }
-
 }

@@ -1,0 +1,7 @@
+{
+  "id": "id",
+  "type": "text",
+  "value":"",
+  "label": { "en": "Virtual ID" },
+  "hint": { "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information." }
+}

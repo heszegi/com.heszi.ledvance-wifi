@@ -1,0 +1,11 @@
+{
+  "name": {
+    "en": "Panel"
+  },
+  "capabilities": [
+    "light_temperature",
+    "dim",
+    "onoff"
+  ],
+  "$extends": ["base_compose"]
+}

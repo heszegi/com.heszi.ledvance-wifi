@@ -1,0 +1,10 @@
+{
+  "name": {
+    "en": "Bulb"
+  },
+  "capabilities": [
+    "onoff",
+    "dim"
+  ],
+  "$extends": ["base_compose"]
+}

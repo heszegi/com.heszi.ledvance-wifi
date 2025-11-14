@@ -1,0 +1,7 @@
+{
+  "id": "mac",
+  "type": "label",
+  "label": { "en": "MAC" },
+  "value":"",
+  "hint": { "en": "The MAC address of the device" }
+}

@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "compatibility": ">=12.4.0",
   "sdk": 3,
+  "brandColor": "#FF6600",
   "platforms": [
     "local"
   ],
@@ -25,5 +26,246 @@
   "author": {
     "name": "Andras Heszegi",
     "email": "heszegi@gmail.com"
+  },
+  "tags": {
+    "en": [
+      "ledvance wifi tuya led light"
+    ]
+  },
+  "homepage": "https://heszi.com",
+  "drivers": [
+    {
+      "class": "light",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/bulb/assets/images/small.png",
+        "large": "/drivers/bulb/assets/images/large.png",
+        "xlarge": "/drivers/bulb/assets/images/xlarge.png"
+      },
+      "icon": "/drivers/panel/assets/icon.svg",
+      "pair": [
+        {
+          "id": "choose_pairing"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "setup_device"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "setup_device"
+        }
+      ],
+      "name": {
+        "en": "Bulb"
+      },
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "id": "bulb",
+      "settings": [
+        {
+          "id": "mac",
+          "type": "label",
+          "label": {
+            "en": "MAC"
+          },
+          "value": "",
+          "hint": {
+            "en": "The MAC address of the device"
+          }
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "IP"
+          },
+          "hint": {
+            "en": "The IP address of the device"
+          }
+        },
+        {
+          "id": "id",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Virtual ID"
+          },
+          "hint": {
+            "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information."
+          }
+        },
+        {
+          "id": "key",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Local key"
+          },
+          "hint": {
+            "en": "The local key of the device is available in the Ledvance mobile app under Device Settings."
+          }
+        }
+      ]
+    },
+    {
+      "class": "light",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/panel/assets/images/small.png",
+        "large": "/drivers/panel/assets/images/large.png",
+        "xlarge": "/drivers/panel/assets/images/xlarge.png"
+      },
+      "icon": "/drivers/panel/assets/icon.svg",
+      "pair": [
+        {
+          "id": "choose_pairing"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "setup_device"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "setup_device"
+        }
+      ],
+      "name": {
+        "en": "Panel"
+      },
+      "capabilities": [
+        "light_temperature",
+        "dim",
+        "onoff"
+      ],
+      "id": "panel",
+      "settings": [
+        {
+          "id": "mac",
+          "type": "label",
+          "label": {
+            "en": "MAC"
+          },
+          "value": "",
+          "hint": {
+            "en": "The MAC address of the device"
+          }
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "IP"
+          },
+          "hint": {
+            "en": "The IP address of the device"
+          }
+        },
+        {
+          "id": "id",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Virtual ID"
+          },
+          "hint": {
+            "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information."
+          }
+        },
+        {
+          "id": "key",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Local key"
+          },
+          "hint": {
+            "en": "The local key of the device is available in the Ledvance mobile app under Device Settings."
+          }
+        }
+      ]
+    }
+  ],
+  "discovery": {
+    "ledvance_bulb": {
+      "type": "mac",
+      "mac": {
+        "manufacturer": [
+          [
+            80,
+            138,
+            6
+          ]
+        ]
+      },
+      "conditions": [
+        [
+          {
+            "field": "mac",
+            "match": {
+              "type": "regex",
+              "value": "^50:8a:06:33:[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
+            }
+          }
+        ]
+      ]
+    },
+    "ledvance_panel": {
+      "type": "mac",
+      "mac": {
+        "manufacturer": [
+          [
+            160,
+            146,
+            8
+          ],
+          [
+            56,
+            31,
+            141
+          ],
+          [
+            80,
+            138,
+            6
+          ]
+        ]
+      },
+      "conditions": [
+        [
+          {
+            "field": "mac",
+            "match": {
+              "type": "regex",
+              "value": "^(?:a0:92:08:06|38:1f:8d:9e|50:8a:06:b4):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
+            }
+          }
+        ]
+      ]
+    }
   }
 }
