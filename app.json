@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.heszi.ledvance-wifi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "brandColor": "#FF6600",
@@ -12,7 +12,7 @@
     "en": "Ledvance Smart+ Wifi"
   },
   "description": {
-    "en": "The missing app for Homey to control LEDVANCE SMART+ Wifi lights"
+    "en": "Pair and control your LEDVANCE SMART+ Wifi lights"
   },
   "category": [
     "lights"
@@ -33,6 +33,13 @@
     ]
   },
   "homepage": "https://heszi.com",
+  "source": "https://github.com/heszegi/com.heszi.ledvance-wifi",
+  "bugs": {
+    "url": "https://github.com/heszegi/com.heszi.ledvance-wifi/issues"
+  },
+  "contributors": {
+    "developers": []
+  },
   "drivers": [
     {
       "class": "light",

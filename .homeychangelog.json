@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "The missing app for Homey to control LEDVANCE SMART+ Wifi lights"
+  },
+  "1.0.2": {
+    "en": "Update app description and informations"
   }
 }
