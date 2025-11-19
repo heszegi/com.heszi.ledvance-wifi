@@ -53,10 +53,10 @@ export class BaseDriver extends Homey.Driver {
           const device = discoveryResults[key] as Homey.DiscoveryResultMAC;
           return {
             name: device.mac,
-            data: { 
+            data: {
               id: device.mac
             },
-            settings: { 
+            settings: {
               mac: device.mac,
               ip: device.address
             },
@@ -82,19 +82,19 @@ export class BaseDriver extends Homey.Driver {
     const newDevices:IDevice[] = [];
     const pairedDevices = this.getDevices();
     discoveredDevices.forEach(discoveredDevice => {
-      for(let key in pairedDevices){
+      for (const key in pairedDevices) {
         const pairedDevice = pairedDevices[key];
 
-        if(discoveredDevice.settings.mac === pairedDevice.getSetting('mac')){
+        if (discoveredDevice.settings.mac === pairedDevice.getSetting('mac')) {
           discoveredDevice = null as unknown as IDevice;
           break;
-        }
-      }
+        };
+      };
 
-      if(discoveredDevice){
-        newDevices.push(discoveredDevice)
-      }
-    })
+      if (discoveredDevice) {
+        newDevices.push(discoveredDevice);
+      };
+    });
     return newDevices;
   }
 }

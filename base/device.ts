@@ -1,5 +1,5 @@
 import Homey from 'homey';
-import TuyaDevice from 'tuyapi'; // https://codetheweb.github.io/tuyapi/index.html
+import TuyaDevice, { TuyaDeviceOptions } from 'tuyapi'; // https://codetheweb.github.io/tuyapi/index.html
 
 export interface ICapabilityMap {
   capability: string;
@@ -8,44 +8,69 @@ export interface ICapabilityMap {
   fromDevice: (value: any) => any;
 }
 
+interface ISettings { [key: string]: boolean | string | number | undefined | null }
+
 export class BaseDevice extends Homey.Device {
   device!: TuyaDevice;
   capabilityMap: ICapabilityMap[] = [];
+  settings: ISettings = {};
 
-  createDevice() {
+  deleteDevice() {
+    this.log('Remove TuyaDevice');
     if (this.device && this.device.isConnected()) {
+      this.device.removeAllListeners();
       this.device.disconnect();
+      this.device = null as any;
     }
+  }
 
-    this.device = new TuyaDevice({
-      id: this.getSetting('id'),
-      key: this.getSetting('key'),
-      ip: this.getSetting('ip'),
-      version: '3.3',
-    });
+  async createDevice() {
+    this.deleteDevice();
+    this.log('Create TuyaDevice');
 
-    this.device.on('connected', () => this.onConnected());
-    this.device.on('disconnected', () => this.onDisconnected());
-    this.device.on('error', (error:any) => this.onError(error));
-    this.device.on('dp-refresh', (data:any) => this.onDpRefresh(data));
-    this.device.on('heartbeat', () => this.onHeartbeat());
-    this.device.on('data', (data:any) => this.onData(data));
+    if (this.settings.id && this.settings.key && this.settings.ip) {
+      try {
+        this.device = new TuyaDevice({
+          ...this.settings,
+          version: '3.3',
+        } as TuyaDeviceOptions);
+      } catch (error) {
+        await this.setUnavailable(this.homey.__('error.device.create_device', {error}));
+      }
 
-    this.connect();
+      if (this.device) {
+        this.device.on('connected', () => this.onConnected());
+        this.device.on('disconnected', () => this.onDisconnected());
+        this.device.on('error', (error:any) => this.onError(error));
+        this.device.on('dp-refresh', (data:any) => this.onDpRefresh(data));
+        this.device.on('heartbeat', () => this.onHeartbeat());
+        this.device.on('data', (data:any) => this.onData(data));
+
+        await this.connect();
+        await this.setAvailable();
+      }
+    } else {
+      await this.setUnavailable(this.homey.__('error.device.missing_attributes', this.settings))
+    }
   }
 
   async connect() {
     this.unsetWarning();
 
-    if (this.device.isConnected()) return true;
+    if (this.device) {
+      if (this.device.isConnected()) return true;
 
-    try {
-      await this.device.connect();
-      return true;
-    } catch (error) {
-      this.setWarning(`Error connecting to device **${this.getName()}**! Please check is deviec power on.`);
-      return false;
+      try {
+        await this.device.connect();
+        return true;
+      } catch (error) {
+        this.setWarning(this.homey.__('error.device.fail_to_connect', {device: this.getName()}));
+        return false;
+      }
     }
+
+    this.setWarning(this.homey.__('error.device.no_device', {device: this.getName()}));
+    return false;
   }
 
   async setDeviceValue(key: string, value: any) {
@@ -107,6 +132,7 @@ export class BaseDevice extends Homey.Device {
    */
   async onInit() {
     this.log('MyDevice has been initialized');
+    this.settings = this.getSettings();
     this.registerCapabilities();
     this.createDevice();
   }
@@ -126,20 +152,10 @@ export class BaseDevice extends Homey.Device {
    * @param {string[]} event.changedKeys An array of keys changed since the previous version
    * @returns {Promise<string|void>} return a custom message that will be displayed
    */
-  async onSettings({
-    oldSettings,
-    newSettings,
-    changedKeys,
-  }: {
-    oldSettings: { [key: string]: boolean | string | number | undefined | null };
-    newSettings: { [key: string]: boolean | string | number | undefined | null };
-    changedKeys: string[];
-  }): Promise<string | void> {
+  async onSettings({ oldSettings, newSettings, changedKeys }: { oldSettings: ISettings; newSettings: ISettings; changedKeys: string[];}): Promise<string | void> {
     this.log('MyDevice settings where changed');
-    if (this.device.isConnected()) {
-      this.device.disconnect();
-    }
-    this.connect();
+    this.settings = newSettings;
+    this.createDevice()
   }
 
   /**
@@ -156,5 +172,6 @@ export class BaseDevice extends Homey.Device {
    */
   async onDeleted() {
     this.log('MyDevice has been deleted');
+    this.deleteDevice();
   }
 }

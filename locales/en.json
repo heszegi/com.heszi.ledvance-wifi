@@ -16,7 +16,11 @@
     },
     "error":{
         "device": {
-            "setting_device_value": "Error setting device value for key __key__: __error__"
+            "missing_attributes": "Some required paramters are missing (id: __id__, key: __key__, ip: __ip__). Please configure them in the device settings or re-add the device!",
+            "setting_device_value": "Error setting device value for key __key__: __error__",
+            "no_device": "The device (__device__) does not exist or cannot be found.",
+            "fail_to_connect": "Error connecting to device **__device__** Please check if the device is powered on.",
+            "create_device": "Error creating the device some paramters are invalid! (__error__)"
         }   
     }
 }

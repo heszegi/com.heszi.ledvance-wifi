@@ -4,7 +4,7 @@ The missing app for Homey to control LEDVANCE SMART+ Wifi lights
 
 2. Install the Ledvance LEDVANCE SMART+ Wifi app
 
-3. Add your device to the official LEDVANCE mobile app: SMART+ (https://apps.apple.com/hu/app/smart/id1576461012).  
+3. Add your device to the official LEDVANCE mobile app: SMART+ (https://www.ledvance.com/en-int/home-lighting/services/united-app).  
 
 4. Open the device details and note the following information: "MAC Address", "Virtual ID", and "Local Key".  
 
