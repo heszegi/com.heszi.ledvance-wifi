@@ -10,5 +10,8 @@
   },
   "1.0.3": {
     "en": "Fix some bug, and update app cover image"
+  },
+  "1.0.4": {
+    "en": "Fix crash caused by invalid \"onoff\" capability value type"
   }
 }
