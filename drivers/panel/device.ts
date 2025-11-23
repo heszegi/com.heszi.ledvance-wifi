@@ -5,8 +5,8 @@ module.exports = class PanelDevice extends BaseDevice {
     {
       capability: 'onoff',
       dp: '20',
-      toDevice: (value: boolean) => value,
-      fromDevice: (value: any) => value,
+      toDevice: (value: boolean) => !!value,
+      fromDevice: (value: any) => !!value,
     },
     {
       capability: 'dim',

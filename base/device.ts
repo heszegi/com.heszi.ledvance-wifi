@@ -8,12 +8,14 @@ export interface ICapabilityMap {
   fromDevice: (value: any) => any;
 }
 
-interface ISettings { [key: string]: boolean | string | number | undefined | null }
+interface IKeyValue {
+  [key: string]: boolean | string | number | undefined | null
+}
 
 export class BaseDevice extends Homey.Device {
   device!: TuyaDevice;
   capabilityMap: ICapabilityMap[] = [];
-  settings: ISettings = {};
+  settings: IKeyValue = {};
 
   deleteDevice() {
     this.log('Remove TuyaDevice');
@@ -35,7 +37,7 @@ export class BaseDevice extends Homey.Device {
           version: '3.3',
         } as TuyaDeviceOptions);
       } catch (error) {
-        await this.setUnavailable(this.homey.__('error.device.create_device', {error}));
+        await this.setUnavailable(this.homey.__('error.device.create_device', { error }));
       }
 
       if (this.device) {
@@ -50,7 +52,7 @@ export class BaseDevice extends Homey.Device {
         await this.setAvailable();
       }
     } else {
-      await this.setUnavailable(this.homey.__('error.device.missing_attributes', this.settings))
+      await this.setUnavailable(this.homey.__('error.device.missing_attributes', this.settings));
     }
   }
 
@@ -64,12 +66,12 @@ export class BaseDevice extends Homey.Device {
         await this.device.connect();
         return true;
       } catch (error) {
-        this.setWarning(this.homey.__('error.device.fail_to_connect', {device: this.getName()}));
+        this.setWarning(this.homey.__('error.device.fail_to_connect', { device: this.getName() }));
         return false;
       }
     }
 
-    this.setWarning(this.homey.__('error.device.no_device', {device: this.getName()}));
+    this.setWarning(this.homey.__('error.device.no_device', { device: this.getName() }));
     return false;
   }
 
@@ -84,7 +86,7 @@ export class BaseDevice extends Homey.Device {
     }
   }
 
-  setCapabilitiyValues(capabilities: {[key: string]: any}) {
+  setCapabilitiyValues(capabilities: IKeyValue) {
     if (capabilities) {
       Object.keys(capabilities).forEach(key => {
         const capabilitie = this.capabilityMap.find(cap => cap.dp === key);
@@ -152,10 +154,10 @@ export class BaseDevice extends Homey.Device {
    * @param {string[]} event.changedKeys An array of keys changed since the previous version
    * @returns {Promise<string|void>} return a custom message that will be displayed
    */
-  async onSettings({ oldSettings, newSettings, changedKeys }: { oldSettings: ISettings; newSettings: ISettings; changedKeys: string[];}): Promise<string | void> {
+  async onSettings({ oldSettings, newSettings, changedKeys }: { oldSettings: IKeyValue; newSettings: IKeyValue; changedKeys: string[];}): Promise<string | void> {
     this.log('MyDevice settings where changed');
     this.settings = newSettings;
-    this.createDevice()
+    this.createDevice();
   }
 
   /**
