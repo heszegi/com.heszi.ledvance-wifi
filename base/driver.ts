@@ -17,12 +17,15 @@ export interface IDevice {
 }
 
 export class BaseDriver extends Homey.Driver {
+  deviceRefreshTriggerCard!: Homey.FlowCardTriggerDevice;
   discoveryStrategy!: DiscoveryStrategy;
   /**
    * onInit is called when the driver is initialized.
    */
   async onInit() {
     this.log('MyDriver has been initialized');
+
+    this.deviceRefreshTriggerCard = this.homey.flow.getDeviceTriggerCard('device_refresh');
   }
 
   async onPair(session: PairSession) {

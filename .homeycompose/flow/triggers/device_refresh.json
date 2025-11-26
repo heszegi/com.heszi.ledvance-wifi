@@ -1,0 +1,21 @@
+{
+  "id": "device_refresh",
+  "title": { "en": "Device dp refresh" },
+  "tokens": [
+    {
+      "name": "rawJSON",
+      "title": { "en": "Raw JSON data" },
+      "type": "string",
+      "example": "{\"dps\": { \"23\": 200 }}"
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": {
+        "driver_id": "bulb|panel"
+      }
+    }
+  ]
+}

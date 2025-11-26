@@ -1,5 +1,6 @@
 import Homey from 'homey';
 import TuyaDevice, { TuyaDeviceOptions } from 'tuyapi'; // https://codetheweb.github.io/tuyapi/index.html
+import { BaseDriver } from './driver';
 
 export interface ICapabilityMap {
   capability: string;
@@ -14,6 +15,7 @@ interface IKeyValue {
 
 export class BaseDevice extends Homey.Device {
   device!: TuyaDevice;
+  driver!: BaseDriver;
   capabilityMap: ICapabilityMap[] = [];
   settings: IKeyValue = {};
 
@@ -119,6 +121,11 @@ export class BaseDevice extends Homey.Device {
 
   onDpRefresh(data: any) {
     this.setCapabilitiyValues(data.dps);
+
+    // add card to be able to get differenet device keys and values
+    if (this.driver.deviceRefreshTriggerCard && data.dps) {
+      this.driver.deviceRefreshTriggerCard.trigger(this, { rawJSON: JSON.stringify(data.dps) }, {}).catch(this.error);
+    }
   }
 
   onHeartbeat() {
