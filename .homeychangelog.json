@@ -13,5 +13,8 @@
   },
   "1.0.4": {
     "en": "Fix crash caused by invalid \"onoff\" capability value type"
+  },
+  "1.0.5": {
+    "en": "Add 'Device dp refresh' trigger flow card with raw device data"
   }
 }
