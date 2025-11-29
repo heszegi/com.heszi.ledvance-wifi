@@ -244,6 +244,97 @@
           }
         }
       ]
+    },
+    {
+      "class": "light",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/panel_rgb/assets/images/small.png",
+        "large": "/drivers/panel_rgb/assets/images/large.png",
+        "xlarge": "/drivers/panel_rgb/assets/images/xlarge.png"
+      },
+      "icon": "/drivers/panel/assets/icon.svg",
+      "pair": [
+        {
+          "id": "choose_pairing"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "setup_device"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "setup_device"
+        }
+      ],
+      "name": {
+        "en": "Panel RGB"
+      },
+      "capabilities": [
+        "light_mode",
+        "light_temperature",
+        "light_saturation",
+        "light_hue",
+        "dim",
+        "onoff"
+      ],
+      "id": "panel_rgb",
+      "settings": [
+        {
+          "id": "mac",
+          "type": "label",
+          "label": {
+            "en": "MAC"
+          },
+          "value": "",
+          "hint": {
+            "en": "The MAC address of the device"
+          }
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "IP"
+          },
+          "hint": {
+            "en": "The IP address of the device"
+          }
+        },
+        {
+          "id": "id",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Virtual ID"
+          },
+          "hint": {
+            "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information."
+          }
+        },
+        {
+          "id": "key",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Local key"
+          },
+          "hint": {
+            "en": "The local key of the device is available in the Ledvance mobile app under Device Settings."
+          }
+        }
+      ]
     }
   ],
   "discovery": {

@@ -7,6 +7,7 @@ export interface ICapabilityMap {
   dp: string;
   toDevice: (value: any) => any;
   fromDevice: (value: any) => any;
+  local?: boolean;
 }
 
 interface IKeyValue {
@@ -82,7 +83,7 @@ export class BaseDevice extends Homey.Device {
       try {
         await this.device.set({ dps: parseInt(key, 10), set: value });
       } catch (error) {
-        this.setWarning(this.homey.__('error.device.setting_device_value', {key, error}));
+        this.setWarning(this.homey.__('error.device.setting_device_value', { key, error }));
         this.log(`Error setting device value for key ${key}:`, error);
       }
     }
@@ -91,10 +92,9 @@ export class BaseDevice extends Homey.Device {
   setCapabilitiyValues(capabilities: IKeyValue) {
     if (capabilities) {
       Object.keys(capabilities).forEach(key => {
-        const capabilitie = this.capabilityMap.find(cap => cap.dp === key);
-        if (capabilitie) {
-          this.setCapabilityValue(capabilitie.capability, capabilitie.fromDevice(capabilities[key]));
-        }
+        this.capabilityMap.filter(cap => cap.dp === key).forEach(cap => {
+          this.setCapabilityValue(cap.capability, cap.fromDevice(capabilities[key]));
+        });
       });
     }
   }
@@ -102,7 +102,8 @@ export class BaseDevice extends Homey.Device {
   registerCapabilities(): void {
     this.capabilityMap.forEach(capability => {
       this.registerCapabilityListener(capability.capability, value => {
-        this.setDeviceValue(capability.dp, capability.toDevice(value));
+        if (capability.local) this.log('setDeviceValue', capability.dp, capability.toDevice(value));
+        else this.setDeviceValue(capability.dp, capability.toDevice(value));
       });
     });
   }

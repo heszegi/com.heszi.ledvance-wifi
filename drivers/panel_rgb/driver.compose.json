@@ -1,0 +1,14 @@
+{
+  "name": {
+    "en": "Panel RGB"
+  },
+  "capabilities": [
+    "light_mode",
+    "light_temperature",
+    "light_saturation",
+    "light_hue",
+    "dim",
+    "onoff"
+  ],
+  "$extends": ["base_compose"]
+}
