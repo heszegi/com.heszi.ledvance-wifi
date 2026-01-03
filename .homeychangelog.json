@@ -19,5 +19,8 @@
   },
   "1.0.6": {
     "en": "Add RGB Panel driver"
+  },
+  "1.0.7": {
+    "en": "Fix RGB Panel HST key"
   }
 }
