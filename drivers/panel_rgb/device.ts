@@ -6,6 +6,11 @@ enum HST {
   TEMPERATURE = 2,
 }
 
+enum LIGHT_MODE {
+  TEMPERATURE = 'temperature',
+  COLOR = 'color'
+}
+
 module.exports = class PanelDevice extends BaseDevice {
   override capabilityMap:ICapabilityMap[] = [
     {
@@ -17,8 +22,8 @@ module.exports = class PanelDevice extends BaseDevice {
     {
       capability: 'light_mode',
       dp: '21',
-      toDevice: (value: any) => (value === 'temperature' ? 'white' : 'colour'),
-      fromDevice: (value: any) => (value === 'white' ? 'temperature' : 'color'),
+      toDevice: (value: any) => (value === LIGHT_MODE.TEMPERATURE ? 'white' : 'colour'),
+      fromDevice: (value: any) => (value === 'white' ? LIGHT_MODE.TEMPERATURE : LIGHT_MODE.COLOR),
     },
     {
       capability: 'dim',
@@ -28,28 +33,27 @@ module.exports = class PanelDevice extends BaseDevice {
     },
     {
       capability: 'light_hue',
-      dp: '25',
+      dp: '24',
       toDevice: (value: any) => this.toDeviceHST(HST.HUE, value),
       fromDevice: (value: any) => this.fromDeviceHST(HST.HUE, value),
     },
     {
       capability: 'light_saturation',
-      dp: '25',
+      dp: '24',
       toDevice: (value: any) => this.toDeviceHST(HST.SATURATION, value),
       fromDevice: (value: any) => this.fromDeviceHST(HST.SATURATION, value),
     },
     {
       capability: 'light_temperature',
-      dp: '25',
+      dp: '24',
       toDevice: (value: any) => this.toDeviceHST(HST.TEMPERATURE, value),
       fromDevice: (value: any) => this.fromDeviceHST(HST.TEMPERATURE, value),
     },
   ];
 
-  currentMode: string = 'temperature'
   currentHST: string = '000000000000';
 
-  private splitToHST(hst: string) {
+  splitToHST(hst: string) {
     const ret = [];
     ret.push(hst.substring(0, 4));
     ret.push(hst.substring(4, 8));
@@ -70,16 +74,12 @@ module.exports = class PanelDevice extends BaseDevice {
     return parseInt(hst[type], 10) / 1000;
   }
 
-  fromDeviceMode(value: string) {
-    return 
-  }
-
   override async onInit() {
     this.setCapabilitiyValues({
       '20': false,
-      '21': this.currentMode,
+      '21': LIGHT_MODE.TEMPERATURE,
       '22': 0,
-      '25': this.currentHST,
+      '24': this.currentHST,
     });
 
     super.onInit();
