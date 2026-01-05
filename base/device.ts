@@ -20,6 +20,17 @@ export class BaseDevice extends Homey.Device {
   capabilityMap: ICapabilityMap[] = [];
   settings: IKeyValue = {};
 
+  /**
+   * Tuya protocol version.
+   *
+   * Default is 3.3 (works for many older LEDVANCE SMART+ WiFi devices).
+   * Some newer devices (e.g. certain T8 tubes) require 3.5.
+   * Drivers can override this method.
+   */
+  protected getTuyaProtocolVersion(): '3.3' | '3.4' | '3.5' {
+    return '3.3';
+  }
+
   deleteDevice() {
     this.log('Remove TuyaDevice');
     if (this.device && this.device.isConnected()) {
@@ -37,7 +48,7 @@ export class BaseDevice extends Homey.Device {
       try {
         this.device = new TuyaDevice({
           ...this.settings,
-          version: '3.3',
+          version: this.getTuyaProtocolVersion(),
         } as TuyaDeviceOptions);
       } catch (error) {
         await this.setUnavailable(this.homey.__('error.device.create_device', { error }));

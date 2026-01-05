@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.heszi.ledvance-wifi",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "brandColor": "#FF6600",
@@ -62,7 +62,7 @@
             "type": "device",
             "name": "device",
             "filter": {
-              "driver_id": "bulb|panel"
+              "driver_id": "bulb|panel|t8_tube"
             }
           }
         ]
@@ -198,6 +198,95 @@
         "onoff"
       ],
       "id": "panel",
+      "settings": [
+        {
+          "id": "mac",
+          "type": "label",
+          "label": {
+            "en": "MAC"
+          },
+          "value": "",
+          "hint": {
+            "en": "The MAC address of the device"
+          }
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "IP"
+          },
+          "hint": {
+            "en": "The IP address of the device"
+          }
+        },
+        {
+          "id": "id",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Virtual ID"
+          },
+          "hint": {
+            "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information."
+          }
+        },
+        {
+          "id": "key",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Local key"
+          },
+          "hint": {
+            "en": "The local key of the device is available in the Ledvance mobile app under Device Settings."
+          }
+        }
+      ]
+    },
+    {
+      "class": "light",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/t8_tube/assets/images/small.png",
+        "large": "/drivers/t8_tube/assets/images/large.png",
+        "xlarge": "/drivers/t8_tube/assets/images/xlarge.png"
+      },
+      "icon": "/drivers/t8_tube/assets/icon.svg",
+      "pair": [
+        {
+          "id": "choose_pairing"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "setup_device"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "setup_device"
+        }
+      ],
+      "name": {
+        "en": "T8 Tube",
+        "de": "T8 Röhre"
+      },
+      "capabilities": [
+        "light_temperature",
+        "dim",
+        "onoff"
+      ],
+      "id": "t8_tube",
       "settings": [
         {
           "id": "mac",

@@ -1,0 +1,18 @@
+{
+  "name": {
+    "en": "T8 Tube",
+    "de": "T8 Tube"
+  },
+  "capabilities": [
+    "light_temperature",
+    "dim",
+    "onoff"
+  ],
+  "$extends": [
+    "base_compose"
+  ],
+  "images": {
+    "large": "assets/images/large.png",
+    "small": "assets/images/small.png"
+  }
+}

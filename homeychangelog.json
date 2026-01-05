@@ -1,0 +1,15 @@
+[
+  {
+    "version": "1.0.8",
+    "date": "2026-01-05",
+    "changes": [
+      "Added support for LEDVANCE Smart+ WiFi T8 Tube devices.",
+      "Added dedicated T8 Tube driver (Tuya protocol 3.5).",
+      "Improved device discovery reliability for WiFi-based LEDVANCE devices.",
+      "Added product images for mobile pairing (iOS & Android).",
+      "Improved icon rendering across Web App, mobile apps, and pairing views.",
+      "Extended supported LEDVANCE MAC OUIs.",
+      "General stability and validation improvements."
+    ]
+  }
+]

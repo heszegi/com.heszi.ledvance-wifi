@@ -14,7 +14,7 @@
       "type": "device",
       "name": "device",
       "filter": {
-        "driver_id": "bulb|panel"
+        "driver_id": "bulb|panel|t8_tube"
       }
     }
   ]
