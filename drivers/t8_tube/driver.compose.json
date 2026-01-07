@@ -7,11 +7,10 @@
   "class": "light",
   "platforms": ["local"],
   "connectivity": ["lan"],
-  "images": {
-    "small": "/drivers/t8_tube/assets/images/small.png",
-    "large": "/drivers/t8_tube/assets/images/large.png",
-    "xlarge": "/drivers/t8_tube/assets/images/xlarge.png"
-  },
+ "images": {
+  "small": "/drivers/t8_tube/assets/images/small.png",
+  "large": "/drivers/t8_tube/assets/images/large.png"
+},
   "icon": "/drivers/t8_tube/assets/icon.svg",
   "capabilities": [
     "onoff",

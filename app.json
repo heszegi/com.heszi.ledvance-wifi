@@ -20,8 +20,7 @@
   "permissions": [],
   "images": {
     "small": "/assets/images/small.png",
-    "large": "/assets/images/large.png",
-    "xlarge": "/assets/images/xlarge.png"
+    "large": "/assets/images/large.png"
   },
   "author": {
     "name": "Andras Heszegi",
@@ -80,8 +79,7 @@
       ],
       "images": {
         "small": "/drivers/bulb/assets/images/small.png",
-        "large": "/drivers/bulb/assets/images/large.png",
-        "xlarge": "/drivers/bulb/assets/images/xlarge.png"
+        "large": "/drivers/bulb/assets/images/large.png"
       },
       "icon": "/drivers/panel/assets/icon.svg",
       "pair": [
@@ -167,8 +165,7 @@
       ],
       "images": {
         "small": "/drivers/panel/assets/images/small.png",
-        "large": "/drivers/panel/assets/images/large.png",
-        "xlarge": "/drivers/panel/assets/images/xlarge.png"
+        "large": "/drivers/panel/assets/images/large.png"
       },
       "icon": "/drivers/panel/assets/icon.svg",
       "pair": [
@@ -255,8 +252,7 @@
       ],
       "images": {
         "small": "/drivers/panel_rgb/assets/images/small.png",
-        "large": "/drivers/panel_rgb/assets/images/large.png",
-        "xlarge": "/drivers/panel_rgb/assets/images/xlarge.png"
+        "large": "/drivers/panel_rgb/assets/images/large.png"
       },
       "icon": "/drivers/panel/assets/icon.svg",
       "pair": [
@@ -351,8 +347,7 @@
       ],
       "images": {
         "small": "/drivers/t8_tube/assets/images/small.png",
-        "large": "/drivers/t8_tube/assets/images/large.png",
-        "xlarge": "/drivers/t8_tube/assets/images/xlarge.png"
+        "large": "/drivers/t8_tube/assets/images/large.png"
       },
       "icon": "/drivers/t8_tube/assets/icon.svg",
       "capabilities": [
