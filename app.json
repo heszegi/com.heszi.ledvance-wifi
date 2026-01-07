@@ -337,6 +337,11 @@
       ]
     },
     {
+      "id": "t8_tube",
+      "name": {
+        "en": "T8 Tube",
+        "de": "T8 R?hre"
+      },
       "class": "light",
       "platforms": [
         "local"
@@ -345,38 +350,16 @@
         "lan"
       ],
       "images": {
-        "large": "assets/images/large.png",
-        "small": "assets/images/small.png"
+        "small": "/drivers/t8_tube/assets/images/small.png",
+        "large": "/drivers/t8_tube/assets/images/large.png",
+        "xlarge": "/drivers/t8_tube/assets/images/xlarge.png"
       },
-      "icon": "/drivers/panel/assets/icon.svg",
-      "pair": [
-        {
-          "id": "choose_pairing"
-        },
-        {
-          "id": "list_devices",
-          "template": "list_devices",
-          "navigation": {
-            "next": "setup_device"
-          },
-          "options": {
-            "singular": true
-          }
-        },
-        {
-          "id": "setup_device"
-        }
-      ],
-      "name": {
-        "en": "T8 Tube",
-        "de": "T8 Tube"
-      },
+      "icon": "/drivers/t8_tube/assets/icon.svg",
       "capabilities": [
-        "light_temperature",
+        "onoff",
         "dim",
-        "onoff"
+        "light_temperature"
       ],
-      "id": "t8_tube",
       "settings": [
         {
           "id": "mac",
