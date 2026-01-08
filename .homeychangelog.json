@@ -22,5 +22,8 @@
   },
   "1.0.7": {
     "en": "Fix RGB Panel HST key"
+  },
+  "1.0.8": {
+    "en": "Add T8 Tube driver (thanks for daCream87)"
   }
 }
