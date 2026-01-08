@@ -1,0 +1,11 @@
+{
+  "name": {
+    "en": "Tube T8"
+  },
+  "capabilities": [
+    "light_temperature",
+    "dim",
+    "onoff"
+  ],
+  "$extends": ["base_compose"]
+}

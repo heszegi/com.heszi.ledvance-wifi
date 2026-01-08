@@ -62,7 +62,7 @@
             "type": "device",
             "name": "device",
             "filter": {
-              "driver_id": "bulb|panel"
+              "driver_id": "bulb|panel|panel_rgb|tube_t8"
             }
           }
         ]
@@ -83,7 +83,7 @@
         "large": "/drivers/bulb/assets/images/large.png",
         "xlarge": "/drivers/bulb/assets/images/xlarge.png"
       },
-      "icon": "/drivers/panel/assets/icon.svg",
+      "icon": "/drivers/bulb/assets/icon.svg",
       "pair": [
         {
           "id": "choose_pairing"
@@ -258,7 +258,7 @@
         "large": "/drivers/panel_rgb/assets/images/large.png",
         "xlarge": "/drivers/panel_rgb/assets/images/xlarge.png"
       },
-      "icon": "/drivers/panel/assets/icon.svg",
+      "icon": "/drivers/panel_rgb/assets/icon.svg",
       "pair": [
         {
           "id": "choose_pairing"
@@ -289,6 +289,94 @@
         "onoff"
       ],
       "id": "panel_rgb",
+      "settings": [
+        {
+          "id": "mac",
+          "type": "label",
+          "label": {
+            "en": "MAC"
+          },
+          "value": "",
+          "hint": {
+            "en": "The MAC address of the device"
+          }
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "IP"
+          },
+          "hint": {
+            "en": "The IP address of the device"
+          }
+        },
+        {
+          "id": "id",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Virtual ID"
+          },
+          "hint": {
+            "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information."
+          }
+        },
+        {
+          "id": "key",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Local key"
+          },
+          "hint": {
+            "en": "The local key of the device is available in the Ledvance mobile app under Device Settings."
+          }
+        }
+      ]
+    },
+    {
+      "class": "light",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/tube_t8/assets/images/small.png",
+        "large": "/drivers/tube_t8/assets/images/large.png",
+        "xlarge": "/drivers/tube_t8/assets/images/xlarge.png"
+      },
+      "icon": "/drivers/tube_t8/assets/icon.svg",
+      "pair": [
+        {
+          "id": "choose_pairing"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "setup_device"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "setup_device"
+        }
+      ],
+      "name": {
+        "en": "Tube T8"
+      },
+      "capabilities": [
+        "light_temperature",
+        "dim",
+        "onoff"
+      ],
+      "id": "tube_t8",
       "settings": [
         {
           "id": "mac",
@@ -389,6 +477,29 @@
             "match": {
               "type": "regex",
               "value": "^(?:a0:92:08:06|38:1f:8d:9e|50:8a:06:b4):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
+            }
+          }
+        ]
+      ]
+    },
+    "ledvance_tube": {
+      "type": "mac",
+      "mac": {
+        "manufacturer": [
+          [
+            16,
+            90,
+            23
+          ]
+        ]
+      },
+      "conditions": [
+        [
+          {
+            "field": "mac",
+            "match": {
+              "type": "regex",
+              "value": "^10:5a:17:c5:[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
             }
           }
         ]

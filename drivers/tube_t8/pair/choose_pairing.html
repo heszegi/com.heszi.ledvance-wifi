@@ -1,0 +1,49 @@
+<form class="homey-form" onsubmit="handleChoose(event)">
+  <fieldset class="homey-form-group" style="margin: 2rem 0 4rem;">
+    <legend class="homey-form-legend" data-i18n="pair.choose_pairing.legend"></legend>
+
+    <fieldset class="homey-form-radio-set">
+      <label class="homey-form-radio">
+        <input class="homey-form-radio-input" type="radio" name="choice" value="AUTO"/>
+        <span class="homey-form-radio-checkmark"></span>
+        <span class="homey-form-radio-text" data-i18n="pair.choose_pairing.AUTO"></span>
+      </label>
+      
+      <label class="homey-form-radio">
+        <input class="homey-form-radio-input" type="radio" name="choice" value="MANUAL"/>
+        <span class="homey-form-radio-checkmark"></span>
+        <span class="homey-form-radio-text" data-i18n="pair.choose_pairing.MANUAL"></span>
+      </label>
+    </fieldset>
+  </fieldset>
+
+  <button class="homey-button-primary-full" type="submit" data-i18n="pair.choose_pairing.next" id="chooseBtn" disabled="disabled"></button>
+</form>
+
+<script type="application/javascript">
+  Homey.setTitle( __('pair.choose_pairing.title') );
+
+  const radioButtons = document.querySelectorAll('input[name="choice"]');
+  const chooseBtn = document.getElementById('chooseBtn');
+  
+  let choosen;
+  for (const radioButton of radioButtons) {
+      radioButton.addEventListener('change', (event) => {
+        choosen = event.target.value;
+        chooseBtn.removeAttribute('disabled');
+      });
+  }
+
+  function handleChoose(event) {
+    event.preventDefault();
+
+    switch (choosen) {
+      case 'AUTO':
+        Homey.showView('list_devices');
+        break;
+      case 'MANUAL':
+        Homey.showView('setup_device');
+        break;
+    }
+  }
+</script>

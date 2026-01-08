@@ -2,6 +2,12 @@ import Homey from 'homey';
 import TuyaDevice, { TuyaDeviceOptions } from 'tuyapi'; // https://codetheweb.github.io/tuyapi/index.html
 import { BaseDriver } from './driver';
 
+export enum TuyaProtocolVersion {
+  V3_3 = '3.3',
+  V3_4 = '3.4',
+  V3_5 = '3.5',
+}
+
 export interface ICapabilityMap {
   capability: string;
   dp: string;
@@ -20,6 +26,8 @@ export class BaseDevice extends Homey.Device {
   capabilityMap: ICapabilityMap[] = [];
   settings: IKeyValue = {};
 
+  protected tuyaProtocolVersion = TuyaProtocolVersion.V3_3;
+
   deleteDevice() {
     this.log('Remove TuyaDevice');
     if (this.device && this.device.isConnected()) {
@@ -37,7 +45,7 @@ export class BaseDevice extends Homey.Device {
       try {
         this.device = new TuyaDevice({
           ...this.settings,
-          version: '3.3',
+          version: this.tuyaProtocolVersion,
         } as TuyaDeviceOptions);
       } catch (error) {
         await this.setUnavailable(this.homey.__('error.device.create_device', { error }));

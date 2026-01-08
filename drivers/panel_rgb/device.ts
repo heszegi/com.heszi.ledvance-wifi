@@ -11,7 +11,7 @@ enum LIGHT_MODE {
   COLOR = 'color'
 }
 
-module.exports = class PanelDevice extends BaseDevice {
+module.exports = class PanelRGBDevice extends BaseDevice {
   override capabilityMap:ICapabilityMap[] = [
     {
       capability: 'onoff',
