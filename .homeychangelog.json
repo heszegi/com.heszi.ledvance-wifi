@@ -25,5 +25,8 @@
   },
   "1.0.8": {
     "en": "Add T8 Tube driver (thanks for daCream87)"
+  },
+  "1.0.9": {
+    "en": "Add support for G9 bulb"
   }
 }
