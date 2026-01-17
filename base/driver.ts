@@ -57,11 +57,11 @@ export class BaseDriver extends Homey.Driver {
           return {
             name: device.mac,
             data: {
-              id: device.mac
+              id: device.mac,
             },
             settings: {
               mac: device.mac,
-              ip: device.address
+              ip: device.address,
             },
           } as IDevice;
         })
@@ -82,22 +82,22 @@ export class BaseDriver extends Homey.Driver {
   }
 
   getNewDevices(discoveredDevices:IDevice[]) {
+    const pairedDevices = Object.values(this.getDevices());
     const newDevices:IDevice[] = [];
-    const pairedDevices = this.getDevices();
-    discoveredDevices.forEach(discoveredDevice => {
-      for (const key in pairedDevices) {
-        const pairedDevice = pairedDevices[key];
 
-        if (discoveredDevice.settings.mac === pairedDevice.getSetting('mac')) {
+    discoveredDevices.forEach(discoveredDevice => {
+      for (const pairedDevice of pairedDevices) {
+        if (discoveredDevice?.settings.mac === pairedDevice.getSetting('mac')) {
           discoveredDevice = null as unknown as IDevice;
           break;
-        };
-      };
+        }
+      }
 
       if (discoveredDevice) {
         newDevices.push(discoveredDevice);
-      };
+      }
     });
+
     return newDevices;
   }
 }

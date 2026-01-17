@@ -16,12 +16,19 @@ module.exports = class BulbG9Device extends BaseDevice {
       toDevice: (value: number) => value * 1000,
       fromDevice: (value: any) => value / 1000,
     },
+    {
+      capability: 'light_temperature',
+      dp: '23',
+      toDevice: (value: number) => 1000 - value * 1000,
+      fromDevice: (value: any) => 1 - value / 1000,
+    },
   ]
 
   override async onInit() {
     this.setCapabilitiyValues({
       '20': false,
       '22': 0,
+      '23': 0,
     });
 
     super.onInit();

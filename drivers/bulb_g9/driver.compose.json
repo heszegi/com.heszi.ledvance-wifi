@@ -3,6 +3,7 @@
     "en": "Bulb G9"
   },
   "capabilities": [
+    "light_temperature",
     "onoff",
     "dim"
   ],
