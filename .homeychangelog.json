@@ -28,5 +28,8 @@
   },
   "1.0.9": {
     "en": "Add support for G9 bulb"
+  },
+  "1.0.10": {
+    "en": "Add light-temperature capabilitie for Bulb G9 device"
   }
 }
