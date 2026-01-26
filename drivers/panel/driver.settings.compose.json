@@ -1,14 +1,192 @@
 [
-    {
-        "$extends": "mac"
+  {
+    "$extends": "mac"
+  },
+  {
+    "$extends": "ip"
+  },
+  {
+    "$extends": "id"
+  },
+  {
+    "$extends": "key"
+  },
+  {
+    "id": "grp_power_behaviour",
+    "type": "group",
+    "label": {
+      "en": "Power behaviour"
     },
-    {
-        "$extends": "ip"
+    "children": [
+      {
+        "id": "power_restore",
+        "type": "dropdown",
+        "label": {
+          "en": "Power Restore"
+        },
+        "hint": {
+          "en": "Defines what the lamp should do after a power outage."
+        },
+        "value": "last",
+        "values": [
+          {
+            "id": "on",
+            "label": {
+              "en": "On"
+            }
+          },
+          {
+            "id": "off",
+            "label": {
+              "en": "Off"
+            }
+          },
+          {
+            "id": "last",
+            "label": {
+              "en": "Last state"
+            }
+          }
+        ]
+      },
+      {
+        "id": "power_restore_info",
+        "type": "label",
+        "label": {
+          "en": "Power Restore"
+        },
+        "value": "Power Restore requires Auto-Poll to be enabled."
+      }
+    ]
+  },
+  {
+    "id": "grp_wall_switch_reconnect",
+    "type": "group",
+    "label": {
+      "en": "Wall switch & reconnect"
     },
-    {
-        "$extends": "id"
+    "children": [
+      {
+        "id": "auto_poll",
+        "type": "checkbox",
+        "label": {
+          "en": "Auto-Poll"
+        },
+        "hint": {
+          "en": "Automatically reconnects the device after power loss (e.g. wall switch)."
+        },
+        "value": false
+      },
+      {
+        "id": "poll_interval",
+        "type": "number",
+        "label": {
+          "en": "Poll interval"
+        },
+        "hint": {
+          "en": "Auto-Poll interval after power loss. Ignored when Smart mode is enabled."
+        },
+        "value": 15,
+        "min": 10,
+        "max": 3600
+      },
+      {
+        "id": "poll_interval_unit",
+        "type": "dropdown",
+        "label": {
+          "en": "Interval unit"
+        },
+        "values": [
+          {
+            "id": "seconds",
+            "label": {
+              "en": "Seconds"
+            }
+          },
+          {
+            "id": "minutes",
+            "label": {
+              "en": "Minutes"
+            }
+          }
+        ],
+        "value": "seconds"
+      },
+      {
+        "id": "smart_polling",
+        "type": "checkbox",
+        "label": {
+          "en": "Smart Mode (Switch Use)"
+        },
+        "hint": {
+          "en": "Learns your switch usage and adapts reconnect polling automatically. When enabled, the Poll interval setting is ignored."
+        },
+        "value": false
+      },
+      {
+        "id": "smart_poll_status",
+        "type": "label",
+        "label": {
+          "en": "Smart mode status"
+        },
+        "hint": {
+          "en": "Shows the next reconnect attempt and the interval chosen by Smart mode."
+        },
+        "value": "Inactive (device online)"
+      },
+      {
+        "id": "smart_poll_learned",
+        "type": "label",
+        "label": {
+          "en": "Smart mode learned offline time"
+        },
+        "hint": {
+          "en": "Average time the device usually stays offline (used to adapt Smart mode)."
+        },
+        "value": "Not learned yet"
+      },
+      {
+        "id": "smart_poll_confidence",
+        "type": "label",
+        "label": {
+          "en": "Smart mode confidence"
+        },
+        "hint": {
+          "en": "How stable the learned reconnect model is (based on how many off→on samples have been observed)."
+        },
+        "value": "Low (n=0)"
+      },
+      {
+        "id": "reset_learning",
+        "type": "checkbox",
+        "label": {
+          "en": "Reset Smart mode learning"
+        },
+        "hint": {
+          "en": "Tick to clear all learned Smart mode data for this device (history, EWMA, confidence). It will untick automatically."
+        },
+        "value": false
+      }
+    ]
+  },
+  {
+    "id": "grp_manual_actions",
+    "type": "group",
+    "label": {
+      "en": "Manual actions"
     },
-    {
-        "$extends": "key"
-    }
+    "children": [
+      {
+        "id": "reconnect_now",
+        "type": "checkbox",
+        "label": {
+          "en": "Reconnect now"
+        },
+        "hint": {
+          "en": "Immediately try to reconnect and refresh the device state."
+        },
+        "value": false
+      }
+    ]
+  }
 ]

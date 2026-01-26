@@ -1,7 +1,7 @@
 import { BaseDevice, ICapabilityMap, TuyaProtocolVersion } from '../../base/device';
 
 module.exports = class TubeT8Device extends BaseDevice {
-  override tuyaProtocolVersion = TuyaProtocolVersion.V3_5;
+  protected override tuyaProtocolVersion = TuyaProtocolVersion.V3_5;
 
   override capabilityMap:ICapabilityMap[] = [
     {
@@ -35,6 +35,8 @@ module.exports = class TubeT8Device extends BaseDevice {
   }
 
   override onDisconnected() {
+    super.onDisconnected();
     this.setCapabilitiyValues({ '20': false });
   }
-};
+
+}

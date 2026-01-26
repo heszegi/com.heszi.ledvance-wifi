@@ -1,8 +1,6 @@
-import { BaseDevice, ICapabilityMap, TuyaProtocolVersion } from '../../base/device';
+import { BaseDevice, ICapabilityMap } from '../../base/device';
 
-module.exports = class BulbG9Device extends BaseDevice {
-  override tuyaProtocolVersion = TuyaProtocolVersion.V3_5;
-
+module.exports = class G9Device extends BaseDevice {
   override capabilityMap:ICapabilityMap[] = [
     {
       capability: 'onoff',
@@ -19,6 +17,7 @@ module.exports = class BulbG9Device extends BaseDevice {
     {
       capability: 'light_temperature',
       dp: '23',
+      // Tuya typically uses 0=cold .. 1000=warm. Homey uses 0=warm .. 1=cold.
       toDevice: (value: number) => 1000 - value * 1000,
       fromDevice: (value: any) => 1 - value / 1000,
     },
@@ -35,6 +34,8 @@ module.exports = class BulbG9Device extends BaseDevice {
   }
 
   override onDisconnected() {
+    super.onDisconnected();
     this.setCapabilitiyValues({ '20': false });
   }
-};
+
+}

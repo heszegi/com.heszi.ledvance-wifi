@@ -26,6 +26,8 @@ module.exports = class BulbDevice extends BaseDevice {
   }
 
   override onDisconnected() {
+    super.onDisconnected();
     this.setCapabilitiyValues({ '20': false });
   }
-};
+
+}

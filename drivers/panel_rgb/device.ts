@@ -86,6 +86,8 @@ module.exports = class PanelRGBDevice extends BaseDevice {
   }
 
   override onDisconnected() {
+    super.onDisconnected();
     this.setCapabilitiyValues({ '20': false });
   }
-};
+
+}
