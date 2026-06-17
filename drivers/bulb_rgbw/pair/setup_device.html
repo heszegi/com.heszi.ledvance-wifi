@@ -14,7 +14,7 @@
 
     <div class="homey-form-group">
       <label class="homey-form-label" for="dIp">IP address</label>
-      <input class="homey-form-input" id="dIp" type="text"/>
+      <input class="homey-form-input" id="dIp" type="text" required/>
     </div>
 
     <div class="homey-form-group">
@@ -40,14 +40,13 @@
   const dId = document.getElementById('dId');
   const dKey = document.getElementById('dKey');
 
-  const requiredFields = [dName,dMac,dId,dKey];
   const fields = [dName,dMac,dIp,dId,dKey];
   const setupBtn = document.getElementById('setupBtn');
 
   fields.forEach(field => {
     field.addEventListener('input', () => {
       setupBtn.removeAttribute('disabled');
-      for(const f of requiredFields) {
+      for(const f of fields) {
         if(f.value.trim() === '') {
           setupBtn.setAttribute('disabled', 'disabled');
           break;
@@ -57,19 +56,9 @@
   })
 
   Homey.emit("get_devices").then(devices => {
-    if (devices.length === 1) {
-      const macCandidate = devices[0].settings.mac || devices[0].data.id || '';
-      const isMac = /^[0-9A-Fa-f]{2}(:[0-9A-Fa-f]{2}){5}$/.test(macCandidate);
-
-      if (isMac) {
-        dMac.value = macCandidate;
-      } else if (devices[0].settings.id) {
-        dId.value = devices[0].settings.id;
-      } else if (devices[0].data.id) {
-        dId.value = devices[0].data.id;
-      }
-
-      dIp.value = devices[0].settings.ip || '';
+    if (devices.length < 2) {
+      dMac.value = devices[0].data.id;
+      dIp.value = devices[0].settings.ip;
     } else if (devices.length >= 2) {
       createDevices(devices);
     }
