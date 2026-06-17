@@ -253,7 +253,7 @@
       ]
     },
     {
-      "class": "socket",
+      "class": "light",
       "platforms": [
         "local"
       ],
@@ -261,11 +261,11 @@
         "lan"
       ],
       "images": {
-        "small": "/drivers/outdoor_plug/assets/images/small.png",
-        "large": "/drivers/outdoor_plug/assets/images/large.png",
-        "xlarge": "/drivers/outdoor_plug/assets/images/xlarge.png"
+        "small": "/drivers/bulb_rgbw/assets/images/small.png",
+        "large": "/drivers/bulb_rgbw/assets/images/large.png",
+        "xlarge": "/drivers/bulb_rgbw/assets/images/xlarge.png"
       },
-      "icon": "/drivers/outdoor_plug/assets/icon.svg",
+      "icon": "/drivers/bulb_rgbw/assets/icon.svg",
       "pair": [
         {
           "id": "choose_pairing"
@@ -285,12 +285,16 @@
         }
       ],
       "name": {
-        "en": "Outdoor Plug"
+        "en": "Bulb RGBW"
       },
       "capabilities": [
+        "light_mode",
+        "light_saturation",
+        "light_hue",
+        "dim",
         "onoff"
       ],
-      "id": "outdoor_plug",
+      "id": "bulb_rgbw",
       "settings": [
         {
           "id": "mac",
@@ -339,7 +343,7 @@
       ]
     },
     {
-      "class": "light",
+      "class": "socket",
       "platforms": [
         "local"
       ],
@@ -347,11 +351,11 @@
         "lan"
       ],
       "images": {
-        "small": "/drivers/bulb_rgbw/assets/images/small.png",
-        "large": "/drivers/bulb_rgbw/assets/images/large.png",
-        "xlarge": "/drivers/bulb_rgbw/assets/images/xlarge.png"
+        "small": "/drivers/outdoor_plug/assets/images/small.png",
+        "large": "/drivers/outdoor_plug/assets/images/large.png",
+        "xlarge": "/drivers/outdoor_plug/assets/images/xlarge.png"
       },
-      "icon": "/drivers/bulb_rgbw/assets/icon.svg",
+      "icon": "/drivers/outdoor_plug/assets/icon.svg",
       "pair": [
         {
           "id": "choose_pairing"
@@ -371,16 +375,12 @@
         }
       ],
       "name": {
-        "en": "Bulb RGBW"
+        "en": "Outdoor Plug"
       },
       "capabilities": [
-        "light_mode",
-        "light_saturation",
-        "light_hue",
-        "dim",
         "onoff"
       ],
-      "id": "bulb_rgbw",
+      "id": "outdoor_plug",
       "settings": [
         {
           "id": "mac",
@@ -743,29 +743,6 @@
         ]
       ]
     },
-    "ledvance_outdoor_plug": {
-      "type": "mac",
-      "mac": {
-        "manufacturer": [
-          [
-            112,
-            137,
-            118
-          ]
-        ]
-      },
-      "conditions": [
-        [
-          {
-            "field": "mac",
-            "match": {
-              "type": "regex",
-              "value": "^(?:70:89:76:d6):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
-            }
-          }
-        ]
-      ]
-    },
     "ledvance_bulb_rgbw": {
       "type": "mac",
       "mac": {
@@ -809,6 +786,29 @@
             "match": {
               "type": "regex",
               "value": "^(?:50:8a:06|a0:92:08|38:1f:8d|3c:0b:59|10:5a:17|fc:67:1f):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
+            }
+          }
+        ]
+      ]
+    },
+    "ledvance_outdoor_plug": {
+      "type": "mac",
+      "mac": {
+        "manufacturer": [
+          [
+            112,
+            137,
+            118
+          ]
+        ]
+      },
+      "conditions": [
+        [
+          {
+            "field": "mac",
+            "match": {
+              "type": "regex",
+              "value": "^(?:70:89:76:d6):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
             }
           }
         ]
