@@ -13,7 +13,6 @@ enum LIGHT_MODE {
 
 module.exports = class BulbRGBWDevice extends BaseDevice {
   override tuyaProtocolVersion = TuyaProtocolVersion.V3_5;
-  currentWorkMode: 'white' | 'colour' = 'white';
 
   override capabilityMap:ICapabilityMap[] = [
     {
@@ -25,86 +24,60 @@ module.exports = class BulbRGBWDevice extends BaseDevice {
     {
       capability: 'light_mode',
       dp: '21',
-      toDevice: (value: any) => {
-        const workMode = value === LIGHT_MODE.TEMPERATURE ? 'white' : 'colour';
-        this.currentWorkMode = workMode;
-        return workMode;
-      },
-      fromDevice: (value: any) => {
-        this.currentWorkMode = value === 'colour' ? 'colour' : 'white';
-        return this.currentWorkMode === 'white' ? LIGHT_MODE.TEMPERATURE : LIGHT_MODE.COLOR;
-      },
+      toDevice: (value: any) => (value === LIGHT_MODE.TEMPERATURE ? 'white' : 'colour'),
+      fromDevice: (value: any) => (value === 'white' ? LIGHT_MODE.TEMPERATURE : LIGHT_MODE.COLOR),
     },
     {
       capability: 'dim',
       dp: '22',
-      toDevice: (value: number) => this.toDeviceBrightness(value),
+      toDevice: (value: number) => {
+        const clamped = Math.max(0.01, value);
+        return this.getCapabilityValue('light_mode') === LIGHT_MODE.COLOR
+          ? this.toDeviceColorData(COLOR_DATA.BRIGHTNESS, clamped)
+          : Math.round(clamped * 1000);
+      },
       fromDevice: (value: any) => value / 1000,
     },
     {
       capability: 'light_hue',
       dp: '24',
-      toDevice: (value: any) => this.toDeviceColorData(COLOR_DATA.HUE, value),
-      fromDevice: (value: any) => this.fromDeviceColorData(COLOR_DATA.HUE, value),
+      toDevice: (value: number) => this.toDeviceColorData(COLOR_DATA.HUE, value, 360),
+      fromDevice: (value: string) => this.fromDeviceColorData(COLOR_DATA.HUE, value, 360),
     },
     {
       capability: 'light_saturation',
       dp: '24',
-      toDevice: (value: any) => this.toDeviceColorData(COLOR_DATA.SATURATION, value),
-      fromDevice: (value: any) => this.fromDeviceColorData(COLOR_DATA.SATURATION, value),
+      toDevice: (value: number) => this.toDeviceColorData(COLOR_DATA.SATURATION, value),
+      fromDevice: (value: string) => this.fromDeviceColorData(COLOR_DATA.SATURATION, value),
     },
   ];
 
   currentColorData: string = '000003e803e8';
 
   splitColorData(colorData: string) {
-    const safeColorData = colorData.length >= 12 ? colorData : this.currentColorData;
-    const ret = [];
-    ret.push(safeColorData.substring(0, 4));
-    ret.push(safeColorData.substring(4, 8));
-    ret.push(safeColorData.substring(8, 12));
-    return ret;
+    return [
+      colorData.substring(0, 4),
+      colorData.substring(4, 8),
+      colorData.substring(8, 12),
+    ];
   }
 
-  toDeviceColorData(type: COLOR_DATA, value: number) {
+  toDeviceColorData(type: COLOR_DATA, value: number, scale = 1000) {
     const colorData = this.splitColorData(this.currentColorData);
-
-    if (type === COLOR_DATA.HUE) {
-      colorData[type] = Math.round(value * 360).toString(16).padStart(4, '0');
-    } else {
-      colorData[type] = Math.round(value * 1000).toString(16).padStart(4, '0');
-    }
-
+    colorData[type] = Math.round(value * scale).toString(16).padStart(4, '0');
     this.currentColorData = colorData.join('');
     return this.currentColorData;
   }
 
-  toDeviceBrightness(value: number) {
-    const clamped = Math.max(0.01, value);
-
-    if (this.currentWorkMode === 'colour') {
-      return this.toDeviceColorData(COLOR_DATA.BRIGHTNESS, clamped);
-    }
-
-    return Math.round(clamped * 1000);
-  }
-
-  fromDeviceColorData(type: COLOR_DATA, value: string) {
+  fromDeviceColorData(type: COLOR_DATA, value: string, scale = 1000) {
     this.currentColorData = value;
-    const colorData = this.splitColorData(this.currentColorData);
-
-    if (type === COLOR_DATA.HUE) {
-      return parseInt(colorData[type], 16) / 360;
-    }
-
-    return parseInt(colorData[type], 16) / 1000;
+    return parseInt(this.splitColorData(value)[type], 16) / scale;
   }
 
   override async onInit() {
     this.setCapabilitiyValues({
       '20': false,
-      '21': LIGHT_MODE.TEMPERATURE,
-      '22': 0,
+      '21': 'white',
       '24': this.currentColorData,
     });
 
@@ -114,22 +87,16 @@ module.exports = class BulbRGBWDevice extends BaseDevice {
   override registerCapabilities(): void {
     this.capabilityMap.forEach(capability => {
       this.registerCapabilityListener(capability.capability, value => {
-        if (capability.capability === 'dim') {
-          const brightnessValue = capability.toDevice(value);
-          if (this.currentWorkMode === 'colour') {
-            this.setDeviceValue('24', brightnessValue);
-          } else {
-            this.setDeviceValue('22', brightnessValue);
-          }
-          return;
-        }
-
-        this.setDeviceValue(capability.dp, capability.toDevice(value));
+        const dp = capability.capability === 'dim' && this.getCapabilityValue('light_mode') === LIGHT_MODE.COLOR
+          ? '24'
+          : capability.dp;
+        this.setDeviceValue(dp, capability.toDevice(value));
       });
     });
   }
 
   override onDisconnected() {
     this.setCapabilitiyValues({ '20': false });
+    this.homey.setTimeout(() => this.createDevice(), 5000);
   }
 };
