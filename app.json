@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.heszi.ledvance-wifi",
-  "version": "1.0.12",
+  "version": "1.1.0",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "brandColor": "#FF6600",
@@ -9,10 +9,10 @@
     "local"
   ],
   "name": {
-    "en": "Ledvance Smart+ Wifi"
+    "en": "SMART+ Wifi"
   },
   "description": {
-    "en": "Pair and control your LEDVANCE SMART+ Wifi lights"
+    "en": "Pair and control your SMART+ Wifi lights and devices"
   },
   "category": [
     "lights"
@@ -29,7 +29,7 @@
   },
   "tags": {
     "en": [
-      "ledvance wifi tuya led light"
+      "ledvance osram wifi tuya led light"
     ]
   },
   "homepage": "https://heszi.com",

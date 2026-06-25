@@ -37,5 +37,8 @@
   },
   "1.0.12": {
     "en": "Fix Outdoor Plug class type and discovery"
+  },
+  "1.1.0": {
+    "en": "Rename the app to match the official Ledvance branding"
   }
 }
