@@ -1,14 +1,14 @@
-The missing app for Homey to control LEDVANCE SMART+ Wifi lights
+The missing app for Homey to control Ledvance SMART+ Wifi lights and devices
 
-1. You must have a Homey Pro.  
+1. You must have a Homey Pro
 
-2. Install the Ledvance LEDVANCE SMART+ Wifi app
+2. Install the SMART+ Wifi app
 
-3. Add your device to the official LEDVANCE mobile app: SMART+ (https://www.ledvance.com/en-int/home-lighting/services/united-app).  
+3. Add your device to the official Ledvance mobile app: SMART+ (https://www.ledvance.com/en-int/home-lighting/services/united-app).  
 
 4. Open the device details and note the following information: "MAC Address", "Virtual ID", and "Local Key".  
 
-5. In Homey, click "New Device" and select the "LEDVANCE SMART+ WiFi" app.  
+5. In Homey, click "New Device" and select the "SMART+ WiFi" app.  
 
 6. Choose your light type.  
 

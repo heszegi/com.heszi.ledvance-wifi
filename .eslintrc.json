@@ -8,5 +8,8 @@
     "object-curly-newline": ["error", { "consistent": true }],
     "no-restricted-syntax": "warn",
     "node/no-unsupported-features/es-syntax": "warn"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

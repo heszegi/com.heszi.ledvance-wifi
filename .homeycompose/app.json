@@ -8,10 +8,10 @@
     "local"
   ],
   "name": {
-    "en": "Ledvance Smart+ Wifi"
+    "en": "SMART+ Wifi"
   },
   "description": {
-    "en": "Pair and control your LEDVANCE SMART+ Wifi lights"
+    "en": "Pair and control your SMART+ Wifi lights and devices"
   },
   "category": [
     "lights"
@@ -28,7 +28,7 @@
   },
   "tags": {
     "en": [
-      "ledvance wifi tuya led light"
+      "ledvance osram wifi tuya led light"
     ]
   },
   "homepage": "https://heszi.com",
