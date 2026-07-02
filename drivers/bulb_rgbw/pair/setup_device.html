@@ -1,0 +1,99 @@
+<form class="homey-form" onsubmit="handleSetup(event)">
+  <fieldset class="homey-form-group" style="margin: 2rem 0 4rem;" id="ledvance_device">
+    <legend class="homey-form-legend" data-i18n="pair.setup_device.legend"></legend>
+
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="dName">Name</label>
+      <input class="homey-form-input" id="dName" type="text" required/>
+    </div>
+
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="dMac">MAC address</label>
+      <input class="homey-form-input" id="dMac" type="text" required/>
+    </div>
+
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="dIp">IP address</label>
+      <input class="homey-form-input" id="dIp" type="text" required/>
+    </div>
+
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="dId">Virtual ID</label>
+      <input class="homey-form-input" id="dId" type="text" required/>
+    </div>
+
+    <div class="homey-form-group">
+      <label class="homey-form-label" for="dKey">Local key</label>
+      <input class="homey-form-input" id="dKey" type="text" required/>
+    </div>
+  </fieldset>
+
+  <button class="homey-button-primary-full" type="submit" data-i18n="pair.setup_device.next" id="setupBtn" disabled="disabled"></button>
+</form>
+
+<script type="application/javascript">
+  Homey.setTitle( __('pair.setup_device.title') );
+
+  const dName = document.getElementById('dName');
+  const dMac = document.getElementById('dMac');
+  const dIp = document.getElementById('dIp');
+  const dId = document.getElementById('dId');
+  const dKey = document.getElementById('dKey');
+
+  const fields = [dName,dMac,dIp,dId,dKey];
+  const setupBtn = document.getElementById('setupBtn');
+
+  fields.forEach(field => {
+    field.addEventListener('input', () => {
+      setupBtn.removeAttribute('disabled');
+      for(const f of fields) {
+        if(f.value.trim() === '') {
+          setupBtn.setAttribute('disabled', 'disabled');
+          break;
+        }
+      }
+    });
+  })
+
+  Homey.emit("get_devices").then(devices => {
+    if (devices.length < 2) {
+      dMac.value = devices[0].data.id;
+      dIp.value = devices[0].settings.ip;
+    } else if (devices.length >= 2) {
+      createDevices(devices);
+    }
+  });
+
+  function handleSetup(event) {
+    event.preventDefault();
+
+    createDevices([{
+      name: dName.value.trim(),
+      data: {
+        id: dMac.value.trim(),
+      },
+      settings: {
+        mac: dMac.value.trim(),
+        ip: dIp.value.trim(),
+        id: dId.value.trim(),
+        key: dKey.value.trim()
+      },
+    }]);
+  }
+
+  function createDevices(devices){
+    Homey.emit("get_new_devices", devices).then(newDevices => {
+      if(newDevices.length > 0){
+        newDevices.forEach(device => {
+          Homey.createDevice(device);
+        });
+
+        Homey.done();
+      } else {
+        Homey.alert(__('pair.setup_device.already_added_device', {mac: devices[0].data.id}), "info").then(respons => {
+          Homey.done();
+        });
+      }
+    })
+  }
+</script>

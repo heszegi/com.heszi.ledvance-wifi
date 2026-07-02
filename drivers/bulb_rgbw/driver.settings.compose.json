@@ -1,0 +1,14 @@
+[
+    {
+        "$extends": "mac"
+    },
+    {
+        "$extends": "ip"
+    },
+    {
+        "$extends": "id"
+    },
+    {
+        "$extends": "key"
+    }
+]
