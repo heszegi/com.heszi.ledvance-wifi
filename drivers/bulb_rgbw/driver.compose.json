@@ -1,0 +1,13 @@
+{
+  "name": {
+    "en": "Bulb RGBW"
+  },
+  "capabilities": [
+    "light_mode",
+    "light_saturation",
+    "light_hue",
+    "dim",
+    "onoff"
+  ],
+  "$extends": ["base_compose"]
+}
