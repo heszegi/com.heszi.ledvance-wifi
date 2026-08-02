@@ -11,7 +11,7 @@ module.exports = class PanelDevice extends BaseDevice {
     {
       capability: 'dim',
       dp: '22',
-      toDevice: (value: number) => value * 1000,
+      toDevice: (value: number) => Math.max(10, value * 1000),
       fromDevice: (value: any) => value / 1000,
     },
     {
