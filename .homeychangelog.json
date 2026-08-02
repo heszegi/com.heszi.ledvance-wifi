@@ -40,5 +40,8 @@
   },
   "1.1.0": {
     "en": "Rename the app to match the official Ledvance branding"
+  },
+  "1.1.1": {
+    "en": "Add RGBW filament globe bulbs"
   }
 }
