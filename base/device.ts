@@ -101,7 +101,7 @@ export class BaseDevice extends Homey.Device {
     if (capabilities) {
       Object.keys(capabilities).forEach(key => {
         this.capabilityMap.filter(cap => cap.dp === key).forEach(cap => {
-          this.setCapabilityValue(cap.capability, cap.fromDevice(capabilities[key]));
+          this.setCapabilityValue(cap.capability, cap.fromDevice(capabilities[key])).catch(this.error);
         });
       });
     }
