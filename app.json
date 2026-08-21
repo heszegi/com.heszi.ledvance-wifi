@@ -73,6 +73,153 @@
             }
           }
         ]
+      },
+      {
+        "id": "sockets_changed",
+        "title": {
+          "en": "Sockets changed"
+        },
+        "tokens": [
+          {
+            "name": "state1",
+            "title": {
+              "en": "Socket 1"
+            },
+            "type": "boolean",
+            "example": "true"
+          },
+          {
+            "name": "state2",
+            "title": {
+              "en": "Socket 2"
+            },
+            "type": "boolean",
+            "example": "true"
+          },
+          {
+            "name": "state3",
+            "title": {
+              "en": "Socket 3"
+            },
+            "type": "boolean",
+            "example": "true"
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=power_strip"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "socket_state",
+        "title": {
+          "en": "[[socket_number]] is turned !{{on|off}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=power_strip"
+          },
+          {
+            "name": "socket_number",
+            "type": "dropdown",
+            "title": {
+              "en": "Socket"
+            },
+            "values": [
+              {
+                "id": "1",
+                "title": {
+                  "en": "Socket 1"
+                }
+              },
+              {
+                "id": "2",
+                "title": {
+                  "en": "Socket 2"
+                }
+              },
+              {
+                "id": "3",
+                "title": {
+                  "en": "Socket 3"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "set_socket",
+        "title": {
+          "en": "Set socket ..."
+        },
+        "titleFormatted": {
+          "en": "Set [[socket_number]] to [[on_off]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=power_strip"
+          },
+          {
+            "name": "socket_number",
+            "type": "dropdown",
+            "title": {
+              "en": "Socket"
+            },
+            "values": [
+              {
+                "id": "1",
+                "title": {
+                  "en": "Socket 1"
+                }
+              },
+              {
+                "id": "2",
+                "title": {
+                  "en": "Socket 2"
+                }
+              },
+              {
+                "id": "3",
+                "title": {
+                  "en": "Socket 3"
+                }
+              }
+            ]
+          },
+          {
+            "name": "on_off",
+            "type": "dropdown",
+            "title": {
+              "en": "On/Off"
+            },
+            "values": [
+              {
+                "id": "true",
+                "title": {
+                  "en": "On"
+                }
+              },
+              {
+                "id": "false",
+                "title": {
+                  "en": "Off"
+                }
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -608,6 +755,112 @@
       ]
     },
     {
+      "class": "socket",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/power_strip/assets/images/small.png",
+        "large": "/drivers/power_strip/assets/images/large.png",
+        "xlarge": "/drivers/power_strip/assets/images/xlarge.png"
+      },
+      "icon": "/drivers/power_strip/assets/icon.svg",
+      "pair": [
+        {
+          "id": "choose_pairing"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "setup_device"
+          },
+          "options": {
+            "singular": true
+          }
+        },
+        {
+          "id": "setup_device"
+        }
+      ],
+      "name": {
+        "en": "Power Strip"
+      },
+      "capabilities": [
+        "onoff",
+        "socket.s1",
+        "socket.s2",
+        "socket.s3"
+      ],
+      "capabilitiesOptions": {
+        "socket.s1": {
+          "title": {
+            "en": "Socket 1"
+          }
+        },
+        "socket.s2": {
+          "title": {
+            "en": "Socket 2"
+          }
+        },
+        "socket.s3": {
+          "title": {
+            "en": "Socket 3"
+          }
+        }
+      },
+      "id": "power_strip",
+      "settings": [
+        {
+          "id": "mac",
+          "type": "label",
+          "label": {
+            "en": "MAC"
+          },
+          "value": "",
+          "hint": {
+            "en": "The MAC address of the device"
+          }
+        },
+        {
+          "id": "ip",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "IP"
+          },
+          "hint": {
+            "en": "The IP address of the device"
+          }
+        },
+        {
+          "id": "id",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Virtual ID"
+          },
+          "hint": {
+            "en": "The virtual ID of the device is available in the Ledvance mobile app under Device Settings → Device Information."
+          }
+        },
+        {
+          "id": "key",
+          "type": "text",
+          "value": "",
+          "label": {
+            "en": "Local key"
+          },
+          "hint": {
+            "en": "The local key of the device is available in the Ledvance mobile app under Device Settings."
+          }
+        }
+      ]
+    },
+    {
       "class": "light",
       "platforms": [
         "local"
@@ -696,6 +949,18 @@
       ]
     }
   ],
+  "capabilities": {
+    "socket": {
+      "type": "boolean",
+      "title": {
+        "en": "On/Off Socket"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "button",
+      "icon": "/drivers/power_strip/assets/icons/socket.svg"
+    }
+  },
   "discovery": {
     "ledvance_bulb": {
       "type": "mac",
@@ -865,6 +1130,29 @@
             "match": {
               "type": "regex",
               "value": "^10:5a:17:c5:[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
+            }
+          }
+        ]
+      ]
+    },
+    "power_strip": {
+      "type": "mac",
+      "mac": {
+        "manufacturer": [
+          [
+            112,
+            137,
+            118
+          ]
+        ]
+      },
+      "conditions": [
+        [
+          {
+            "field": "mac",
+            "match": {
+              "type": "regex",
+              "value": "^(?:70:89:76:d6):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
             }
           }
         ]

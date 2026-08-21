@@ -1,0 +1,19 @@
+{
+  "type": "mac",
+  "mac": {
+    "manufacturer": [
+      [ 112, 137, 118 ]
+    ]
+  },
+  "conditions": [
+    [
+      {
+        "field": "mac",
+        "match": {
+          "type": "regex",
+          "value": "^(?:70:89:76:d6):[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}$"
+        }
+      }
+    ]
+  ]
+}

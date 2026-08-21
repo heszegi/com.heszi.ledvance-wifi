@@ -1,0 +1,88 @@
+{
+  "triggers": [
+    {
+      "id": "sockets_changed",
+      "title": {
+          "en": "Sockets changed"
+      },
+      "tokens": [
+        {
+          "name": "state1",
+          "title": { "en": "Socket 1" },
+          "type": "boolean",
+          "example": "true"
+        },
+        {
+          "name": "state2",
+          "title": { "en": "Socket 2" },
+          "type": "boolean",
+          "example": "true"
+        },
+        {
+          "name": "state3",
+          "title": { "en": "Socket 3" },
+          "type": "boolean",
+          "example": "true"
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "socket_state",
+      "title": {
+          "en": "[[socket_number]] is turned !{{on|off}}"
+      },
+      "args": [
+        {
+          "name": "socket_number",
+          "type": "dropdown",
+          "title": {
+            "en": "Socket"
+          },
+          "values": [
+            { "id": "1", "title": { "en": "Socket 1" } },
+            { "id": "2", "title": { "en": "Socket 2" } },
+            { "id": "3", "title": { "en": "Socket 3" } }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "id": "set_socket",
+      "title": {
+          "en": "Set socket ..."
+      },
+      "titleFormatted": {
+        "en": "Set [[socket_number]] to [[on_off]]"
+      },
+      "args": [
+        {
+          "name": "socket_number",
+          "type": "dropdown",
+          "title": {
+            "en": "Socket"
+          },
+          "values": [
+            { "id": "1", "title": { "en": "Socket 1" } },
+            { "id": "2", "title": { "en": "Socket 2" } },
+            { "id": "3", "title": { "en": "Socket 3" } }
+          ]
+        },
+        {
+          "name": "on_off",
+          "type": "dropdown",
+          "title": {
+            "en": "On/Off"
+          },
+          "values": [
+            { "id": "true", "title": { "en": "On" } },
+            { "id": "false", "title": { "en": "Off" } }
+          ]
+        }
+      ]
+    }
+  ]
+}

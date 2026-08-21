@@ -1,0 +1,30 @@
+{
+  "name": {
+    "en": "Power Strip"
+  },
+  "capabilities": [
+    "onoff",
+    "socket.s1",
+    "socket.s2",
+    "socket.s3"
+  ],
+  "capabilitiesOptions": {
+    "socket.s1": {
+      "title": {
+        "en": "Socket 1"
+      }
+    },
+    "socket.s2": {
+      "title": {
+        "en": "Socket 2"
+      }
+    },
+    "socket.s3": {
+      "title": {
+        "en": "Socket 3"
+      }
+    }
+  },
+  "$extends": ["base_compose"],
+  "class": "socket"
+}
